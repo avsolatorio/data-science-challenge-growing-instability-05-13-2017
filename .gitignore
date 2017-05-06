@@ -1,3 +1,11 @@
+# Local data
+*.bin
+*.vec
+*.csv
+*.npy
+*.model
+*.hdf
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
