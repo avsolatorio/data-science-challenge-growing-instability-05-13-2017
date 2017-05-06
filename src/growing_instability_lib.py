@@ -24,6 +24,9 @@ from sklearn.preprocessing import StandardScaler
 
 # http://thinknook.com/10-ways-to-improve-your-classification-algorithm-performance-2013-01-21/
 
+fsmodel = None
+wvmodel = None
+
 sample_sub = pd.read_csv('../data/sampleSubmission.csv')
 
 topics = sorted(set(sample_sub.columns.difference(['id'])))
@@ -231,6 +234,7 @@ def parse_training_data_with_valid_topics(path, keys=[], topics=[], limit=None):
 
 
 def transform_fasttext(tokens, stopwords=[]):
+    global fsmodel
     # This requires fsmodel to be present in the namespace.
     fs_feature_vec = tokens.map(
         lambda x: [w for w in x.split() if (w not in stopwords)]
@@ -252,6 +256,7 @@ def transform_unsupervised_sentiment_neuron(tokens, stopwords=[]):
 
 
 def transform_word2vec(tokens, stopwords=[]):
+    global wvmodel
     # This requires wvmodel to be present in the namespace.
     wv_feature_vec = tokens.map(
         lambda x: [w for w in x.split() if (w not in stopwords and w in wvmodel.wv.vocab)]
